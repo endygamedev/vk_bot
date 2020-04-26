@@ -8,6 +8,8 @@ from deadlines_data import * # Модуль для работы с таблиц�
 
 # Доп. модули
 import datetime
+import os
+from funcy import group_by
 from bs4 import BeautifulSoup
 from epiweeks import Week
 
@@ -38,7 +40,7 @@ _COMMANDS = {
                 'привет': 'random.choice(_EMOJIS)+random.choice(greetings_list[25:-40])',
                 'пока': 'random.choice(_EMOJIS)+random.choice(goodbye_list)',
                 'расписание': 'weekNumber',
-                'команды': "🔧 Команды:\n• привет\n• пока\n• расписание\n• дедлайны\n• почта\n• уровень\n• команды",
+                'команды': '🔧 Команды:\n• привет\n• пока\n• расписание\n• дедлайны\n• почта\n• уровень\n• команды',
                 'дедлайны': 'update_deadlines(client)',
                 'почта': "📬Логин: appliedmath1900@yahoo.com\n🔒Пароль: PMstudents1900",
                 'уровень': 'history_messages(vk, session.user_id)',
@@ -50,14 +52,17 @@ commands_list = list(_COMMANDS.keys())
 messages_list = list(_COMMANDS.values())
 
 # Фоточки
-_PICTURES = ['level.png','bye1.png','bye2.png','bye3.png','bye4.png','hello1.png','hello2.png','hello3.png','hello4.png','hello5.png','hello6.png']
+pic_path = os.listdir(path='pictures')
+all_pic = [list(map(lambda x: 'pictures/'+x, i)) for i in list(group_by(0, pic_path).values())]
+pic_category = ['hello', 'bye', 'level']
+_PICTURES = dict(zip(pic_category,all_pic))
 
 # Расписание
-with open('oddWeek.txt', 'r', encoding="utf-8") as file_odd, open('evenWeek.txt', 'r', encoding="utf-8") as file_even:
+with open('data/oddWeek.txt', 'r', encoding="utf-8") as file_odd, open('data/evenWeek.txt', 'r', encoding="utf-8") as file_even:
     oddWeek = file_odd.read()
     evenWeek = file_even.read()
 
-# Определяет текущую неделю, мы выявили опытным путём, что начало недель датируется 13.8.2019
+# Определяет текущую неделю, мы выявили опытным путём, что начало недель датируется 10.8.2019
 weekNumber = Week.fromdate(datetime.date(2019,8,10)).weektuple()[-1]
 
 
@@ -68,10 +73,10 @@ for session in longpoll.listen():
             user_message = session.text
 
             if user_message.lower() == commands_list[0]: # привет
-                send_photo(vk, session.user_id, random.choice(_EMOJIS) + random.choice(greetings_list[25:-40]), random.choice(_PICTURES[5:12]))
+                send_photo(vk, session.user_id, random.choice(_EMOJIS) + random.choice(greetings_list[25:-40]), random.choice(_PICTURES['hello']))
 
             elif user_message.lower() == commands_list[1]: # пока
-                send_photo(vk, session.user_id, random.choice(_EMOJIS) + random.choice(goodbye_list),random.choice(_PICTURES[1:5]))
+                send_photo(vk, session.user_id, random.choice(_EMOJIS) + random.choice(goodbye_list),random.choice(_PICTURES['bye']))
 
             elif user_message.lower() == commands_list[2]: # расписание
                 if weekNumber%2 == 0:
@@ -89,7 +94,7 @@ for session in longpoll.listen():
                 write_message(vk, session.user_id, messages_list[5])
 
             elif user_message.lower() == commands_list[6]: # добавляем кол-во сообщений в переписке
-                send_photo(vk, session.user_id, history_messages(vk, session.user_id), _PICTURES[0])
+                send_photo(vk, session.user_id, history_messages(vk, session.user_id), _PICTURES['level'][0])
 
 
             elif user_message.lower() == commands_list[7] or user_message.lower() == commands_list[8]: # обновляем клавиатуру

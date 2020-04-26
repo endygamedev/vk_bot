@@ -4,7 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 # Данные для GoogleDrive API
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('data/client_secret.json', scope)
 client = gspread.authorize(creds)
 
 # Метод для работы с таблицей дедлайнов
