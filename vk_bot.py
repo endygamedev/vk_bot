@@ -62,8 +62,8 @@ with open('data/oddWeek.txt', 'r', encoding="utf-8") as file_odd, open('data/eve
     oddWeek = file_odd.read()
     evenWeek = file_even.read()
 
-# Определяет текущую неделю, мы выявили опытным путём, что начало недель датируется 10.8.2019
-weekNumber = Week.fromdate(datetime.date(2019,8,10)).weektuple()[-1]
+# Определяет текущую неделю, мы выявили опытным путём, что начало недель датируется 11.8.2019
+weekNumber = Week.fromdate(datetime.date(2019,8,11)).weektuple()[-1]
 
 
 # Запускаем нашего бота
