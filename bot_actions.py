@@ -94,10 +94,7 @@ keyboard = {
         ],
         [
             link_button('http://www.rating.unecon.ru/', "БРС"),
-            link_button('https://student.unecon.ru/', "Moodle")
-        ],
-        [
-            link_button('https://us02web.zoom.us/j/624529129?pwd=bHBoODh3YTlad3VlNHFOcStNM3ZxQT09', "Мат. анализ")
+            link_button('https://us02web.zoom.us/j/624529129?pwd=bHBoODh3YTlad3VlNHFOcStNM3ZxQT09', "Мат. анализ)
         ]
     ]
 }
