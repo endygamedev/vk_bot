@@ -28,7 +28,7 @@ for hello in greetings:
 goodbye_list = ['Пока-пока, человек...', 'Пока!\nБудь здоров!', 'Увидимся!', 'Пока, бывай', 'До скорого']
 
 # Токен нашей группы и работа с запросами
-_TOKEN = '3d423eb8812629fc6834d96bd0b5352f75f83f7691f828ca84ac57b909bf2ff519f438bc6aa4d9316cc03'
+_TOKEN = 'токен группы'
 vk = vk_api.VkApi(token=_TOKEN)
 longpoll = VkLongPoll(vk)
 
