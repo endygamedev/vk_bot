@@ -43,12 +43,27 @@ _COMMANDS = {
                 'дедлайны': 'update_deadlines(client)',
                 'почта': "📬Логин: appliedmath1900@yahoo.com\n🔒Пароль: PMstudents1900",
                 'уровень': 'history_messages(vk, session.user_id)',
-                'клавиатура': 'vk_keyboard(vk, session.user_id, keyboard)',
-                'начать': 'vk_keyboard(vk, session.user_id, keyboard)'
+                'дни рождения': '💊 Выбери нужный вариант',
+                'на месяц': '📅 Выбери нужный месяц',
+                'на неделю': 'week(birthdaysList)',
+                'все': "'.join(birthdaysList)",
+                'учебники': '💼 Выбери нужный предмет',
+                '_SUBJECTS': '📚 Выбери нужный учебник',
+                'назад': '🛠 Вываливаемся, товарищи',
+                'кнопка на случай, если устал учиться': '😺 Как же я тебя понимаю...',
+                'что посмотреть?': 'send_films(filmlist)',
+                'но не устал от математики': 'send_task(olimplist)',
+                'полезные ссылки': '🔗 Выберите ссылку'
              }
 
 commands_list = list(_COMMANDS.keys())
 messages_list = list(_COMMANDS.values())
+
+# Месяца
+_MONTHS = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь','июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
+
+# Предметы
+_SUBJECTS = ['английский', 'алгебра', 'wolfram math', 'мат.анализ', 'дискр.мат']
 
 # Фоточки
 pic_path = os.listdir(path='pictures')
@@ -57,7 +72,7 @@ pic_category = ['hello', 'bye', 'level']
 _PICTURES = dict(zip(pic_category,all_pic))
 
 # Расписание
-with open('data/oddWeek.txt', 'r', encoding="utf-8") as file_odd, open('data/evenWeek.txt', 'r', encoding="utf-8") as file_even:
+with open('data/oddWeek.txt', 'r', encoding='utf-8') as file_odd, open('data/evenWeek.txt', 'r', encoding="utf-8") as file_even:
     oddWeek = file_odd.read()
     evenWeek = file_even.read()
 
@@ -77,8 +92,10 @@ with open('data/olimp.txt','r', encoding='utf-8') as olimp:
 # Запускаем нашего бота
 for session in longpoll.listen():
     if session.type == VkEventType.MESSAGE_NEW:
+
         user_message = session.text.lower()
         keyboard = create_keyboard(user_message)
+
         if session.to_me:
             if user_message == commands_list[0]: # привет
                 send_photo(vk, session.user_id, random.choice(_EMOJIS) + random.choice(greetings_list[25:-40]), random.choice(_PICTURES['hello']), keyboard)
@@ -106,41 +123,41 @@ for session in longpoll.listen():
             elif user_message == commands_list[6]: # добавляем кол-во сообщений в переписке
                 send_photo(vk, session.user_id, history_messages(vk, session.user_id), _PICTURES['level'][0], keyboard)
 
-            elif user_message=='дни рождения':
-                write_message(vk,session.user_id,'Выбери нужный вариант',keyboard=keyboard)
+            elif user_message == commands_list[7]: # узнаём Дни рождения
+                write_message(vk, session.user_id, messages_list[7], keyboard)
 
-            elif user_message=='на месяц':
-                write_message(vk,session.user_id,'Выбери нужный месяц',keyboard=keyboard)
+            elif user_message == commands_list[8]: # Дни рождения на месяц
+                write_message(vk, session.user_id, messages_list[8], keyboard)
 
-            elif user_message=='на неделю':
-                write_message(vk,session.user_id,week(birthdaysList),keyboard=keyboard)
+            elif user_message == commands_list[9]: # Дни рождения на неделю
+                write_message(vk, session.user_id, week(birthdaysList), keyboard)
 
-            elif user_message=='все':
-                write_message(vk,session.user_id,''.join(birthdaysList),keyboard=keyboard)
+            elif user_message == commands_list[10]: # Дни рожения на год
+                write_message(vk, session.user_id, ''.join(birthdaysList), keyboard)
 
-            elif user_message=='январь' or user_message=='февраль' or user_message=='март' or user_message=='апрель' or user_message=='май' or user_message=='июнь' or user_message=='июль' or user_message=='август' or user_message=='сентябрь' or user_message=='октябрь' or user_message=='ноябрь' or user_message=='декабрь':
-                write_message(vk,session.user_id, dr(user_message, birthdaysList), keyboard=keyboard)
+            elif user_message in _MONTHS: # Дни рожения в определённом месяце
+                write_message(vk, session.user_id, dr(user_message, birthdaysList), keyboard)
 
-            elif user_message=='учебники':
-                write_message(vk,session.user_id,  'Выбери нужный предмет',keyboard=keyboard)
+            elif user_message == commands_list[11]: # учебники
+                write_message(vk, session.user_id, messages_list[11], keyboard)
 
-            elif user_message=='английский' or user_message=='алгебра' or user_message=='wolfram math' or user_message=='мат.анализ' or user_message=='дискр.мат':
-                write_message(vk,session.user_id,  'Выбери нужный учебник',keyboard=keyboard)
+            elif user_message in _SUBJECTS:
+                write_message(vk, session.user_id, messages_list[12], keyboard)
 
-            elif user_message=='назад':
-                write_message(vk,session.user_id ,'Вываливаемся товарищи',keyboard=keyboard)
+            elif user_message == commands_list[13]: # возвращаемся в главное "меню"
+                write_message(vk, session.user_id, messages_list[13], keyboard)
 
-            elif user_message=='кнопка на случай, если устал учиться':
-                write_message(vk,session.user_id ,'Как же я тебя понимаю...',keyboard=keyboard)
+            elif user_message == commands_list[14]: # меню с задачками или фильмами
+                write_message(vk, session.user_id, messages_list[14], keyboard)
 
-            elif user_message=='что посмотреть?':
-                write_message(vk,session.user_id ,send_films(filmlist),keyboard=keyboard)
+            elif user_message == commands_list[15]: # фильмы
+                write_message(vk, session.user_id, send_films(filmlist), keyboard)
 
-            elif user_message=='но не устал от математики':
-                write_message(vk,session.user_id ,send_task(olimplist),keyboard=keyboard)
+            elif user_message == commands_list[16]: # задачки
+                write_message(vk, session.user_id, send_task(olimplist), keyboard)
 
-            elif user_message=='полезные ссылки':
-                write_message(vk,session.user_id ,'Ммммм',keyboard=keyboard)
+            elif user_message == commands_list[17]: # полезные ссылки
+                write_message(vk, session.user_id, messages_list[17], keyboard)
 
             else:
-                write_message(vk, session.user_id, "Я тупой бот и не понимаю вашего человеческого языка...\n\n" + messages_list[3],keyboard)
+                write_message(vk, session.user_id, "Я тупой бот и не понимаю вашего человеческого языка...\n\n" + messages_list[3], keyboard)

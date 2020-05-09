@@ -79,7 +79,11 @@ def link_button(link, label):
         }
     }
 
+# День рожения на неделе
 def week(data):
+    '''
+    week(data) - возвращает список людей у которых День рождения на этой неделе.
+    '''
     l=[]
     for b in range(1,8):
         a = datetime.date.today()
@@ -89,40 +93,55 @@ def week(data):
     l1=[i[5:7] for i in l]
     l2=[i[-2:] for i in l]
     dr=[i for i in data if i[-3:-1] in l1 and i[-6:-4] in l1]
-    if dr==[]:
-        return 'На этой неделе пока никто не родился, но есть шанс это исправить)\nСвободен сегодня вечером?'
+    if dr == []:
+        return 'На этой неделе пока никто не родился, но есть шанс это исправить)\n😏 Свободен сегодня вечером?'
     else:
         return ''.join(dr)
 
+# Список фильмов
 def send_films(list):
-    return 'Другие Primats рекомендуют:\n\n'+''.join(random.sample(list,3))
+    '''
+    send_films(list) - возвращает список фильмов.
+    '''
+    return '🎬 Другие Primats рекомендуют:\n\n'+''.join(random.sample(list,3))
 
+# Генерация олимпиадной задачки
 def send_task(list):
-    return 'Развлекайся\n\n'+random.choice(list)
+    '''
+    send_task(list) - возвращает олимпиадную задачку.
+    '''
+    return '🤓 Развлекайся\n\n' + random.choice(list)
 
+# День рожения за месяц
 def dr(m, data):
+    '''
+    dr(m, data) - возвращает список людей у которых День рождения в определённом месяце m.
+    '''
     mon={"январь":'01','февраль':'02','март':"03",'апрель':'04','май':'05','июнь':'06','июль':'07','август':'08','сентябрь':'09',"октябрь":'10','ноябрь':'11','декабрь':'12'}
-    L=[i for i in data if i[-3:-1]==mon.get(m)]
-    if L==[]:
-        return 'В этом месяце пока никто не родился, но есть шанс это исправить)\nСвободен сегодня вечером?'
+    L=[i for i in data if i[-3:-1]  ==  mon.get(m)]
+    if L == []:
+        return 'В этом месяце пока никто не родился, но есть шанс это исправить)\n😏 Свободен сегодня вечером?'
     else:
         return ''.join(L)
 
 # Клавиатура
 def create_keyboard(response):
+    '''
+    create_keyboard(response) - возвращает пользователю сформированную клавиатуру.
+    '''
     keyboard = VkKeyboard(one_time=False)
 
-    if response=='кнопка на случай, если устал учиться':
+    if response == 'кнопка на случай, если устал учиться':
         keyboard.add_button('но не устал от математики', color=VkKeyboardColor.POSITIVE)
         keyboard.add_line()
         keyboard.add_button('Что посмотреть?', color=VkKeyboardColor.POSITIVE)
 
-    elif response=='дни рождения':
+    elif response == 'дни рождения':
         keyboard.add_button('На месяц',color=VkKeyboardColor.POSITIVE)
         keyboard.add_button('На неделю',color=VkKeyboardColor.POSITIVE)
         keyboard.add_button('Все',color=VkKeyboardColor.POSITIVE)
 
-    elif response=='учебники':
+    elif response == 'учебники':
         keyboard.add_button('Мат.анализ',color=VkKeyboardColor.PRIMARY)
         keyboard.add_button('Алгебра',color=VkKeyboardColor.PRIMARY)
         keyboard.add_button('Дискр.мат',color=VkKeyboardColor.PRIMARY)
@@ -134,7 +153,7 @@ def create_keyboard(response):
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='английский':
+    elif response == 'английский':
         keyboard.add_openlink_button('Market Leader','https://vk.com/away.php?to=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1xEkwAyIT2AtAuJ56xVyfFQ5w8czPtJAa%2Fview&cc_key=')
         keyboard.add_line()
         keyboard.add_openlink_button('Facilitator','https://vk.com/away.php?to=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F17P1MYWDJDREdfGQRGD9inyREZAqEXlR6%2Fview&cc_key=')
@@ -143,7 +162,7 @@ def create_keyboard(response):
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='wolfram math':
+    elif response == 'wolfram math':
         keyboard.add_openlink_button('Фридман,Леора','https://vk.com/away.php?to=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1xg9g1LAuw-jIH6HwH9e-UE_GU9bq8Kri&cc_key=')
         keyboard.add_line()
         keyboard.add_openlink_button('S.Wolfram "Wolfram Language"','https://vk.com/away.php?to=https%3A%2F%2Fwww.wolfram.com%2Flanguage%2Felementary-introduction%2F2nd-ed%2Findex.html&cc_key=')
@@ -152,14 +171,14 @@ def create_keyboard(response):
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='мат.анализ':
+    elif response == 'мат.анализ':
         keyboard.add_openlink_button('Демидович (задачник)','https://drive.google.com/file/d/1VnHhcsfAlVg48nsYXWdXfNZiVkakamv-/view')
         keyboard.add_line()
         keyboard.add_openlink_button('Виноградов, Громов','https://vk.com/doc108898977_514996947?hash=984e14ef93de90b23e&dl=a91def24fdbf7a14b9')
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='алгебра':
+    elif response == 'алгебра':
         keyboard.add_openlink_button('Икрамов (задачник)','https://vk.com/away.php?to=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1KxIrUV3yGT_IKzz2X52JW6x1mUmoqP7C&cc_key=')
         keyboard.add_line()
         keyboard.add_openlink_button('Воеводин','https://vk.com/away.php?to=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1Cd-Q2GMVhLERwJSh1lyriE89DsBRUc6V&cc_key=')
@@ -170,14 +189,14 @@ def create_keyboard(response):
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='дискр.мат':
+    elif response == 'дискр.мат':
         keyboard.add_openlink_button('Иванов, Фридман','https://vk.com/doc234167654_514661330?hash=9fead45b2c2f3e2ce2&dl=0bef1a3cd3e9273e36')
         keyboard.add_line()
         keyboard.add_openlink_button('Корте "Комбинаторная оптимизация"','https://drive.google.com/file/d/1kOZcitXuRBTKX0pgpXC8FEPenW4rjz6y/view')
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='полезные ссылки':
+    elif response == 'полезные ссылки':
         keyboard.add_openlink_button('Мат. анализ','https://us02web.zoom.us/j/624529129?pwd=bHBoODh3YTlad3VlNHFOcStNM3ZxQT09')
         keyboard.add_line()
         keyboard.add_openlink_button('БРС','http://www.rating.unecon.ru/')
@@ -186,7 +205,7 @@ def create_keyboard(response):
         keyboard.add_line()
         keyboard.add_button('Назад',color=VkKeyboardColor.NEGATIVE)
 
-    elif response=='на месяц':
+    elif response == 'на месяц':
         keyboard.add_button('Январь',color=VkKeyboardColor.PRIMARY)
         keyboard.add_button('Февраль',color=VkKeyboardColor.PRIMARY)
         keyboard.add_button('Март',color=VkKeyboardColor.PRIMARY)
