@@ -1,4 +1,5 @@
 [![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)](https://www.python.org/downloads/release/python-380/)
+![GitHub repo size](https://img.shields.io/github/repo-size/endygamedev/vk_bot)
 
 # 🌐 Бот для сообщества ВК потока ПМ-19
 
