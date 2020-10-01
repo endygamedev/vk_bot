@@ -8,7 +8,7 @@ import datetime
 
 
 def write_message(vk: vk_api.vk_api.VkApi, user_id, message: str, keyboard) -> None:
-    ''' Отправка текстового сообщения с текстом (message).
+    ''' Отправка сообщения с текстом (message).
 
         Аргументы:
             vk: vk_api.vk_api.VkApi - объект VkApi для работы с группой
@@ -33,7 +33,7 @@ def write_message(vk: vk_api.vk_api.VkApi, user_id, message: str, keyboard) -> N
 
 
 def send_photo(vk: vk_api.vk_api.VkApi, user_id, message: str, picture, keyboard) -> None:
-    ''' Отправка сообщения сообщения с текстом (message) и с картинкой (picture).
+    ''' Отправка сообщения с текстом (message) и с картинкой (picture).
 
         Аргументы:
             vk: vk_api.vk_api.VkApi - объект VkApi для работы с группой
