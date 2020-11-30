@@ -28,11 +28,11 @@ Cоздать бота, который по нескольким запроса�
 ![GitHub Logo](data/vk_logo.png)
 
 ## Установка бота на сервере:
-1. Клонируем репозиторий: `git clone https://github.com/endygamedev/vk_bot.git`
-1. Заходим в каталог с репозиторием: `cd vk_bot`
-1. Устанавливаем пакеты: `pip3 install -r requirements.txt`
-1. Устанавливаем диспетчера служб: `apt-get install systemd`
-1. Перейдём в каталог: `cd /etc/systemd/system`
+1. Клонируем репозиторий: `$ git clone https://github.com/endygamedev/vk_bot.git`
+1. Заходим в каталог с репозиторием: `$ cd vk_bot`
+1. Устанавливаем пакеты: `$ pip3 install -r requirements.txt`
+1. Устанавливаем диспетчера служб: `$ apt-get install systemd`
+1. Перейдём в каталог: `$ cd /etc/systemd/system`
 1. Создадим новый файл `bot.service`:
 ```
 [Unit]
@@ -52,15 +52,15 @@ Restart=always
 WantedBy=multi-user.target
 ```
 7. Запускаем бота:
+```bash
+$ systemctl daemon-reload
+$ systemctl enable bot
+$ systemctl start bot
+$ systemctl status bot
 ```
-systemctl daemon-reload
-systemctl enable bot
-systemctl start bot
-systemctl status bot
-```
-8. Для остановки бота нужно использовать: `systemctl stop bot`
+8. Для остановки бота нужно использовать: `$ systemctl stop bot`
 
-Часть кода писала [Влада](https://github.com/VlPukhkalo)
+Часть кода писала [**`Влада`**](https://github.com/VlPukhkalo)
 
 <sub> Проект по ЯиМП: 1 курс (2 семестр) </sub>
 <br>
