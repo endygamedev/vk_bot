@@ -65,3 +65,8 @@ $ systemctl status bot
 <sub> Проект по ЯиМП: 1 курс (2 семестр) </sub>
 <br>
 <sub> Последнее обновление: 1.10.2020 </sub>
+
+<br>
+<p align="center">
+  <sub> | <a href="https://endygamedev.github.io"> 👨‍💻 endygamdev </a> | </sub>
+</p>
